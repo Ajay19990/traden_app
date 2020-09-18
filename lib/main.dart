@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:traden_app/pages/welcome_page.dart';
+import 'constants.dart';
 
 void main() {
   runApp(TradenApp());
@@ -10,17 +12,8 @@ class TradenApp extends StatelessWidget {
     return MaterialApp(
       home: WelcomePage(),
       debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class WelcomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('TradenApp')),
-      body: Center(
-        child: Text('Hello there'),
+      theme: ThemeData(
+        buttonTheme: ButtonThemeData(height: 42, buttonColor: Colors.indigoAccent),
       ),
     );
   }
