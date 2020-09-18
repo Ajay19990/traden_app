@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:traden_app/widgets/custom_button.dart';
+import 'package:traden_app/widgets/custom_fat_button.dart';
 import 'package:traden_app/utilities/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:traden_app/widgets/custom_card_indicator.dart';
@@ -54,7 +54,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                 ),
               ),
-              CustomButton(
+              CustomFatButton(
                 title: 'Login',
                 onPressed: () {
                   Navigator.push(
@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   );
                 },
               ),
-              CustomButton(title: 'Sign up', onPressed: () {}),
+              CustomFatButton(title: 'Sign up', onPressed: () {}),
             ],
           ),
         ),

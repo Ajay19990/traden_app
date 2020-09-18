@@ -17,11 +17,13 @@ class TradenApp extends StatelessWidget {
         textTheme: TextTheme(
           headline6: TextStyle(
             color: Colors.indigoAccent,
-            fontSize: 26,
+            fontSize: 24,
+            letterSpacing: 0.0,
+            fontWeight: FontWeight.bold,
           ),
           bodyText1: TextStyle(
             color: Colors.indigoAccent,
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
       ),

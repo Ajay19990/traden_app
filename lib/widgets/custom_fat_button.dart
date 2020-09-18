@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomFatButton extends StatelessWidget {
   final String title;
   final Function onPressed;
 
-  CustomButton({
+  CustomFatButton({
     this.title,
     this.onPressed,
   });
