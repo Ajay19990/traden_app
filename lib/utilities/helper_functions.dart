@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:traden_app/widgets/custom_thin_button.dart';
 
+var password;
+
 String validatePassword(String value) {
   if (!(value.length > 5) && value.isNotEmpty) {
-    return 'Password should contains more then 5 character';
+    return 'Password should contain more then 5 characters';
+  }
+  password = value;
+  return null;
+}
+
+String validateConfirmPassword(String confirmPassword) {
+  if (!(confirmPassword == password) && confirmPassword.isNotEmpty) {
+    return 'Passwords don\'t match.';
   }
   return null;
 }
@@ -40,5 +50,12 @@ void showAlert({BuildContext context, String message}) {
       );
       return alert;
     },
+  );
+}
+
+void pushScreen(BuildContext context, Widget screen) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => screen),
   );
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:traden_app/pages/signup_page.dart';
+import 'package:traden_app/utilities/helper_functions.dart';
 import 'package:traden_app/widgets/custom_fat_button.dart';
 import 'package:traden_app/utilities/constants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -57,13 +59,15 @@ class _WelcomePageState extends State<WelcomePage> {
               CustomFatButton(
                 title: 'Login',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
+                  pushScreen(context, LoginPage());
                 },
               ),
-              CustomFatButton(title: 'Sign up', onPressed: () {}),
+              CustomFatButton(
+                title: 'Sign up',
+                onPressed: () {
+                  pushScreen(context, SignUpPage());
+                },
+              ),
             ],
           ),
         ),

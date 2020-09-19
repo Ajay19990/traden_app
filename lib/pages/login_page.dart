@@ -5,6 +5,7 @@ import 'package:traden_app/widgets/custom_textfield.dart';
 import 'package:traden_app/widgets/custom_thin_button.dart';
 import 'package:traden_app/services/network_helper.dart';
 import 'home_page.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -15,8 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   var hideText = true;
   var iconColor = Colors.grey;
   var isLoading = false;
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   void togglePasswordTFStatus() {
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       await NetworkHelper.login(
         email: emailController.text,
         password: passwordController.text,
-        completion: handleResponse,
+        completion: handleLoginResponse,
       );
       setState(() {
         isLoading = false;
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void handleResponse(String responseBody, String error) {
+  void handleLoginResponse(String responseBody, String error) {
     if (responseBody != null) {
       Navigator.push(
         context,
@@ -103,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                         iconColor: Colors.white,
                         textFieldController: emailController,
                         validateField: validateEmail,
+                        errorText: 'Email',
                       ),
                       SizedBox(height: 10),
                       CustomTextField(
@@ -113,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: togglePasswordTFStatus,
                         textFieldController: passwordController,
                         validateField: validatePassword,
+                        errorText: 'Password',
                       ),
                       SizedBox(height: 20),
                       CustomFatButton(

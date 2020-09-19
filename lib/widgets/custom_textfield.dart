@@ -4,41 +4,46 @@ import 'package:traden_app/utilities/helper_functions.dart';
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   final String hintText;
+  final String errorText;
   final Color iconColor;
   final bool hide;
   final TextEditingController textFieldController;
   Function onPressed = () {};
   final Function validateField;
   final bool isPasswordTF;
+  final double verticalPadding;
 
   CustomTextField({
     this.hintText,
+    this.errorText,
     this.iconColor,
     this.hide = false,
     this.onPressed,
     this.isPasswordTF = false,
     this.textFieldController,
     this.validateField,
+    this.verticalPadding = 2,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: verticalPadding),
       child: Theme(
         child: TextFormField(
           controller: textFieldController,
           obscureText: hide,
           validator: (value) {
             if (value.isEmpty) {
-              return 'Please enter some text';
-            } else {
+              return '$errorText can\'t be empty.';
+            } else if (validateField != null) {
               return validateField(value);
+            } else {
+              return null;
             }
             return null;
           },
           decoration: InputDecoration(
-            // errorText: validateField,
             focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),

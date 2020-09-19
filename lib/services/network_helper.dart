@@ -12,7 +12,7 @@ _path(Path path) {
     case Path.login:
       return 'login/';
     case Path.signup:
-      return '';
+      return 'profile/';
   }
 }
 
@@ -23,10 +23,40 @@ class NetworkHelper {
     return baseUrl + _path(path);
   }
 
-  static Future login(
-      {String email,
-      String password,
-      completion(String responseBody, String error)}) async {
+  static Future signUp({
+    String name,
+    String email,
+    String password,
+    completion(String responseBody, String error),
+  }) async {
+    var signUpResponse = await http.post(
+      url(Path.signup),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'email': email,
+        'phone': '0000000000',
+        'password': password,
+      }),
+    );
+    print(signUpResponse.statusCode);
+    print(signUpResponse.body);
+
+    var responseBody = signUpResponse.body;
+    if (signUpResponse.statusCode == 201) {
+      completion(jsonDecode(responseBody), null);
+    } else if (signUpResponse.statusCode == 400) {
+      completion(null, jsonDecode(responseBody)['error'] as String);
+    }
+  }
+
+  static Future login({
+    String email,
+    String password,
+    completion(String responseBody, String error),
+  }) async {
     var loginResponse = await http.post(
       url(Path.login),
       headers: <String, String>{
@@ -38,9 +68,9 @@ class NetworkHelper {
       }),
     );
 
+    var responseBody = loginResponse.body;
     if (loginResponse.statusCode == 200) {
-      var responseBody = loginResponse.body;
-      completion(responseBody, null);
+      completion(jsonEncode(responseBody), null);
     } else if (loginResponse.statusCode == 400) {
       completion(null, 'Unable to login with provided credentials');
     }
