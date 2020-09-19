@@ -3,19 +3,26 @@ import 'package:flutter/material.dart';
 class CustomThinButton extends StatelessWidget {
   final String title;
   final Function onPressed;
+  final double height;
+  final double horizontalPadding;
 
-  CustomThinButton({this.title, this.onPressed});
+  CustomThinButton({
+    this.title,
+    this.onPressed,
+    this.height = 16,
+    this.horizontalPadding = 28.0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 28.0,
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
           ),
           child: SizedBox(
-            height: 16,
+            height: height,
             child: FlatButton(
               child: Text(
                 title,
