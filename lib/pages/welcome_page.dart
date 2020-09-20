@@ -38,7 +38,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CarouselSlider(
-                        items: carouselItems,
+                        items: onBoardingItems,
                         options: CarouselOptions(
                           viewportFraction: 1.0,
                           enableInfiniteScroll: false,
@@ -51,7 +51,10 @@ class _WelcomePageState extends State<WelcomePage> {
                           },
                         ),
                       ),
-                      CustomCardIndicator(currentIndex: currentIndex),
+                      CustomCardIndicator(
+                        currentIndex: currentIndex,
+                        items: onBoardingItems,
+                      ),
                     ],
                   ),
                 ),

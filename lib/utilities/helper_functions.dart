@@ -27,7 +27,7 @@ String validateEmail(String value) {
   return null;
 }
 
-void showAlert({BuildContext context, String message}) {
+void showAlert({BuildContext context, String message, title = 'Error'}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -42,7 +42,7 @@ void showAlert({BuildContext context, String message}) {
 
       // set up the AlertDialog
       AlertDialog alert = AlertDialog(
-        title: Text('Error'),
+        title: Text(title),
         content: Text(message),
         actions: [
           okButton,

@@ -30,6 +30,7 @@ class _TradenAppState extends State<TradenApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: isLoggedIn == 'true' ? HomePage() : WelcomePage(),
+      routes: {'/homePage': (ctx) => HomePage()},
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         buttonTheme: ButtonThemeData(height: 42, buttonColor: Colors.indigoAccent),
@@ -45,9 +46,19 @@ class _TradenAppState extends State<TradenApp> {
             fontSize: 14,
           ),
           headline5: TextStyle(
+            color: Colors.indigo[600],
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          headline4: TextStyle(
             color: Colors.grey[600],
             fontSize: 14,
             fontWeight: FontWeight.bold,
+          ),
+          headline3: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 14,
+            letterSpacing: 0.2,
           ),
           bodyText2: TextStyle(
             fontSize: 11,

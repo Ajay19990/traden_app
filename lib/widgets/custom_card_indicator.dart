@@ -3,15 +3,19 @@ import 'package:traden_app/utilities/constants.dart';
 
 class CustomCardIndicator extends StatelessWidget {
   final int currentIndex;
+  final List<dynamic> items;
 
-  CustomCardIndicator({@required this.currentIndex});
+  CustomCardIndicator({
+    @required this.currentIndex,
+    @required this.items,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: carouselItems.map((onBoardingCard) {
-        int index = carouselItems.indexOf(onBoardingCard);
+      children: items.map((item) {
+        int index = items.indexOf(item);
         return Container(
           width: 7.0,
           height: 7.0,

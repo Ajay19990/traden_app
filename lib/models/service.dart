@@ -32,7 +32,7 @@ class Service {
     shortDescription = json['short_description'];
     rating = json['rating'];
     createdAt = json['created_at'];
-    lat = json['lat'];
-    lon = json['lon'];
+    lat = json['lat'].toString();
+    lon = json['lon'].toString();
   }
 }
