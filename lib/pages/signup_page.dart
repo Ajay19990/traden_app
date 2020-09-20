@@ -45,7 +45,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void handleLoginResponse(responseBody, String error) async {
     if (responseBody != null) {
-      print(responseBody['token']);
       await storage.write(key: 'token', value: responseBody['token']);
       await storage.write(key: 'isLoggedIn', value: 'true');
       Navigator.push(

@@ -84,7 +84,7 @@ class NetworkHelper {
           .toList();
       completion(serviceList, null);
     } else {
-      completion([], 'Unable to fetch services at the moment');
+      completion(List<Service>(), 'Unable to fetch services at the moment');
     }
   }
 
@@ -124,7 +124,6 @@ class NetworkHelper {
     );
 
     var servicesResponseBody = servicesResponse.body;
-    print(servicesResponse.body);
     if (servicesResponse.statusCode == 200) {
       var decodedServices = jsonDecode(servicesResponseBody);
       List<Service> serviceList = decodedServices
@@ -154,8 +153,6 @@ class NetworkHelper {
         'password': password,
       }),
     );
-    print(signUpResponse.statusCode);
-    print(signUpResponse.body);
 
     var responseBody = signUpResponse.body;
     if (signUpResponse.statusCode == 201) {
