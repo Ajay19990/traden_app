@@ -1,4 +1,5 @@
 import 'package:traden_app/widgets/onboarding_card.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 var carouselItems = [
   OnBoardingCard(
@@ -18,3 +19,5 @@ var carouselItems = [
     description: 'No need to wait and communicate with service providers instantly',
   ),
 ];
+
+final storage = new FlutterSecureStorage();

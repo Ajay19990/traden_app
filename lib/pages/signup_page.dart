@@ -6,6 +6,7 @@ import 'package:traden_app/utilities/helper_functions.dart';
 import 'package:traden_app/widgets/custom_thin_button.dart';
 import 'package:traden_app/services/network_helper.dart';
 import 'home_page.dart';
+import 'package:traden_app/utilities/constants.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -42,8 +43,11 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void handleLoginResponse(String responseBody, String error) async {
+  void handleLoginResponse(responseBody, String error) async {
     if (responseBody != null) {
+      print(responseBody['token']);
+      await storage.write(key: 'token', value: responseBody['token']);
+      await storage.write(key: 'isLoggedIn', value: 'true');
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),

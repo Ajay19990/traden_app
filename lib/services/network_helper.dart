@@ -1,10 +1,11 @@
 import 'dart:convert';
-
+import 'package:traden_app/models/service.dart';
 import 'package:http/http.dart' as http;
 
 enum Path {
   login,
   signup,
+  followingServices,
 }
 
 _path(Path path) {
@@ -13,6 +14,8 @@ _path(Path path) {
       return 'login/';
     case Path.signup:
       return 'profile/';
+    case Path.followingServices:
+      return 'services-list/';
   }
 }
 
@@ -23,11 +26,35 @@ class NetworkHelper {
     return baseUrl + _path(path);
   }
 
+  static Future allServices(
+    String token,
+    completion(services, String error),
+  ) async {
+    var servicesResponse = await http.get(
+      url(Path.followingServices),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Token $token',
+      },
+    );
+
+    var servicesResponseBody = servicesResponse.body;
+    if (servicesResponse.statusCode == 200) {
+      var decodedServices = jsonDecode(servicesResponseBody);
+      List<Service> serviceList = decodedServices
+          .map<Service>((serviceJson) => Service.fromJson(serviceJson))
+          .toList();
+      completion(serviceList, null);
+    } else {
+      completion([], 'Unable to fetch services at the moment');
+    }
+  }
+
   static Future signUp({
     String name,
     String email,
     String password,
-    completion(String responseBody, String error),
+    completion(responseBody, String error),
   }) async {
     var signUpResponse = await http.post(
       url(Path.signup),
@@ -48,14 +75,14 @@ class NetworkHelper {
     if (signUpResponse.statusCode == 201) {
       completion(jsonDecode(responseBody), null);
     } else if (signUpResponse.statusCode == 400) {
-      completion(null, jsonDecode(responseBody)['error'] as String);
+      completion(null, jsonDecode(responseBody)['error']);
     }
   }
 
   static Future login({
     String email,
     String password,
-    completion(String responseBody, String error),
+    completion(responseBody, String error),
   }) async {
     var loginResponse = await http.post(
       url(Path.login),
@@ -70,7 +97,7 @@ class NetworkHelper {
 
     var responseBody = loginResponse.body;
     if (loginResponse.statusCode == 200) {
-      completion(jsonEncode(responseBody), null);
+      completion(jsonDecode(responseBody), null);
     } else if (loginResponse.statusCode == 400) {
       completion(null, 'Unable to login with provided credentials');
     }

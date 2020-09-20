@@ -5,7 +5,7 @@ import 'package:traden_app/widgets/custom_textfield.dart';
 import 'package:traden_app/widgets/custom_thin_button.dart';
 import 'package:traden_app/services/network_helper.dart';
 import 'home_page.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:traden_app/utilities/constants.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -65,8 +65,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void handleLoginResponse(String responseBody, String error) {
+  void handleLoginResponse(responseBody, String error) async {
     if (responseBody != null) {
+      print(responseBody['token']);
+      await storage.write(key: 'token', value: responseBody['token']);
+      await storage.write(key: 'isLoggedIn', value: 'true');
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
